@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Card,
   CardImg,
@@ -6,34 +6,24 @@ import {
   CardTitle
 } from "reactstrap";
 
-// Amy: JavaScript is case sensitive. the name of your export has to be the same in the import 
-// in your CampSiteInfoComponent.js you have: export default CampsiteInfo;
-// change the import name below to what you have in your export.
-import CampSiteInfo from './CampSiteInfoComponent';
 
-class Directory extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCampsite: null
-    };
-  }
+function RenderDirectoryItem({campsite}) {
+  return (
+    <Card>
+    <CardImg width="100%" src={campsite.image} alt={campsite.name} />
+    <CardImgOverlay>
+      <CardTitle>{campsite.name}</CardTitle>
+    </CardImgOverlay>
+  </Card>
+  );
+}
 
-  onCampsiteSelect(campsite) {
-    this.setState({ selectedCampsite: campsite });
-  }
-
-
-  render() {
-    const directory = this.props.campsites.map(campsite => {
+function Directory (props) {
+  
+    const directory = props.campsites.map(campsite => {
       return (
         <div key={campsite.id} className="col-md-5 m-1">
-          <Card onClick={() => this.onCampsiteSelect(campsite)}>
-            <CardImg width="100%" src={campsite.image} alt={campsite.name} />
-            <CardImgOverlay>
-              <CardTitle>{campsite.name}</CardTitle>
-            </CardImgOverlay>
-          </Card>
+          <RenderDirectoryItem campsite={campsite} />
         </div>
       );
     });
@@ -43,10 +33,8 @@ class Directory extends Component {
         <div className="row">
           {directory}
         </div>
-        <CampSiteInfo campsite={this.state.selectedCampsite} />
       </div>
     );
   }
-}
 
 export default Directory;
