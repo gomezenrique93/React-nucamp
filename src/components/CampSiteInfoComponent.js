@@ -44,6 +44,7 @@ function RenderCampsite({ campsite }) {
 }
 
 function RenderComments({ comments, postComment, campsiteId }) {
+  console.log("Comments", comments)
   if (comments) {
     return (
       <div className="col-md-5 m-1">

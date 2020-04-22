@@ -13,6 +13,6 @@ export const Promotions = (state = { isLoading: true,
             return {...state, isLoading: false, errMess: action.payload};
             
         default:
-          return state;
-      }
+        return state;
+    }
 };
